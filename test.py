@@ -4,6 +4,8 @@ import sys
 
 action = sys.argv[1] 
 
+print("The python script has been invoked with action:",action)
+
 def test_function (action):
     if action == 'stop':
         print("The Astra Dev Environment is stopped")
@@ -12,6 +14,5 @@ def test_function (action):
     if action == 'status':
         print("The Astra Dev Environment status is displayed")
 
-print("The python script has been invoked with action:",action)
 
 test_function (action)
