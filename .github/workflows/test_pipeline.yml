@@ -1,8 +1,7 @@
 name: Astra-dev-environment-start-stop -testing
 on:
   push:
-    #branches: [ dev ]
-  
+    #branches: [ dev ] 
 jobs:
   testing:
     runs-on: ubuntu-latest
