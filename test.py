@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import sys
 
 action = sys.argv[1] 
