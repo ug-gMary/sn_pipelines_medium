@@ -1,7 +1,7 @@
 name: Astra-dev-environment-start-stop -testing
 on:
   push:
-    branches: [ dev ]
+    #branches: [ dev ]
   
 jobs:
   testing:
@@ -26,4 +26,4 @@ jobs:
 
       - name: Execute my python script
         run: |
-            python test.py 
+            /usr/bin/python3 test.py 
