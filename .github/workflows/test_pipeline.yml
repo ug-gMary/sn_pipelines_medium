@@ -25,12 +25,18 @@ jobs:
 
       - name: Execute my python script for job - Start
         run: |
+            ECRACCOUNTID=$(aws sts get-caller-identity --query Account --output text)
+            echo ${ECRACCOUNTID}
             python test.py start
 
       - name: Execute my python script for job - Stop
         run: |
+            ECRACCOUNTID=$(aws sts get-caller-identity --query Account --output text)
+            echo ${ECRACCOUNTID}
             python test.py stop
 
       - name: Execute my python script for job - Status
         run: |
+            ECRACCOUNTID=$(aws sts get-caller-identity --query Account --output text)
+            echo ${ECRACCOUNTID}
             python test.py status
