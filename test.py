@@ -14,4 +14,4 @@ def test_function (action):
 
 print("The python script has been invoked with action:",action)
 
-#test_function (action)
+test_function (action)

@@ -23,6 +23,14 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
 
-      - name: Execute my python script
+      - name: Execute my python script for job - Start
         run: |
             python test.py start
+
+      - name: Execute my python script for job - Stop
+        run: |
+            python test.py stop
+
+      - name: Execute my python script for job - Status
+        run: |
+            python test.py status
