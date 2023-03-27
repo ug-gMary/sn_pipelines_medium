@@ -26,4 +26,4 @@ jobs:
 
       - name: Execute my python script
         run: |
-            python test.py start
+            python test.py 

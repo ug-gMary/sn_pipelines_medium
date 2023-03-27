@@ -10,5 +10,6 @@ def test_function (action):
     if action == 'status':
         print("The Astra Dev Environment status is displayed")
 
-print("The python script has been invoked")
-test_function (action)
+print("The python script has been invoked with action:",action)
+
+#test_function (action)
