@@ -25,4 +25,4 @@ jobs:
 
       - name: Execute my python script
         run: |
-            /usr/bin/python3 test.py 
+            python test.py start
