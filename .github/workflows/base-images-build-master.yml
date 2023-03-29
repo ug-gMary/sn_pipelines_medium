@@ -1,0 +1,67 @@
+name: base-images-build-master
+on:
+  push:
+    #branches: [ dev,prod ] 
+
+jobs:
+
+  build-image-base-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      HTTP_PROXY: http://emea-aws-webproxy.service.cloud.local:3128
+      HTTPS_PROXY: http://emea-aws-webproxy.service.cloud.local:3128
+      NO_PROXY: "localhost,127.0.0.1,169.254.169.254,cloud.local,sanofi.com,docker,dkr.ecr.eu-west-1.amazonaws.com,sqs.ecr.eu-west-1.amazonaws.com,api.ecr.eu-west-1.amazonaws.com,ecs-telemetry.eu-west-1.amazonaws.com,ec2messages.eu-west-1.amazonaws.com,ec2.eu-west-1.amazonaws.com,lambda.eu-west-1.amazonaws.com,ssm.eu-west-1.amazonaws.com,.s3.eu-west-1.amazonaws.com,s3.eu-west-1.amazonaws.com,autoscaling.eu-west-1.amazonaws.com,ecs.eu-west-1.amazonaws.com,logs.eu-west-1.amazonaws.com,ecs-agent.eu-west-1.amazonaws.com,ssmmessages.eu-west-1.amazonaws.com"
+      BASE_IMAGE_DOCKERFILE: "UbuntuDockerBase"
+      BASE_IMAGE_NAME: astrabase  
+    steps:
+      - name : build-dev:base
+        with: 
+          tags: Astra-Dev
+        run: |
+         
+          ECRACCOUNTID=$(aws sts get-caller-identity --query Account --output text)  
+          echo ${ECRACCOUNTID}
+
+          docker build
+          t ${ECRACCOUNTID}.dkr.ecr.eu-west-1.amazonaws.com/engine_base:${BASE_IMAGE_NAME} 
+          f docker/baseImage/${BASE_IMAGE_DOCKERFILE}
+          build-arg http_proxy=${HTTP_PROXY}
+          build-arg https_proxy=${HTTPS_PROXY}
+          build-arg no_proxy=${NO_PROXY}
+          .
+          docker push ${ECRACCOUNTID}.dkr.ecr.eu-west-1.amazonaws.com/engine_base:${BASE_IMAGE_NAME}
+
+  build-image-base-prod:
+    runs-on: ubuntu-latest
+    env:
+      HTTP_PROXY: http://emea-aws-webproxy.service.cloud.local:3128
+      HTTPS_PROXY: http://emea-aws-webproxy.service.cloud.local:3128
+      NO_PROXY: "localhost,127.0.0.1,169.254.169.254,cloud.local,sanofi.com,docker,dkr.ecr.eu-west-1.amazonaws.com,sqs.ecr.eu-west-1.amazonaws.com,api.ecr.eu-west-1.amazonaws.com,ecs-telemetry.eu-west-1.amazonaws.com,ec2messages.eu-west-1.amazonaws.com,ec2.eu-west-1.amazonaws.com,lambda.eu-west-1.amazonaws.com,ssm.eu-west-1.amazonaws.com,.s3.eu-west-1.amazonaws.com,s3.eu-west-1.amazonaws.com,autoscaling.eu-west-1.amazonaws.com,ecs.eu-west-1.amazonaws.com,logs.eu-west-1.amazonaws.com,ecs-agent.eu-west-1.amazonaws.com,ssmmessages.eu-west-1.amazonaws.com"
+      BASE_IMAGE_DOCKERFILE: "UbuntuDockerBase"
+      BASE_IMAGE_NAME: astrabase
+    steps:
+      - name : build-prod:base
+        with: 
+          tags: Projects-Runner
+        run: |
+            docker build
+            t ${ECRACCOUNTID}.dkr.ecr.eu-west-1.amazonaws.com/engine_base:${BASE_IMAGE_NAME} 
+            f docker/baseImage/${BASE_IMAGE_DOCKERFILE}
+            build-arg http_proxy=${HTTP_PROXY}
+            build-arg https_proxy=${HTTPS_PROXY}
+            build-arg no_proxy=${NO_PROXY}
+            .
+            docker push ${ECRACCOUNTID}.dkr.ecr.eu-west-1.amazonaws.com/engine_base:${BASE_IMAGE_NAME}
+        
+  build-image-orchestrator-dev:
+    runs-on: ubuntu-latest
+    env:
+      HTTP_PROXY: http://emea-aws-webproxy.service.cloud.local:3128
+      HTTPS_PROXY: http://emea-aws-webproxy.service.cloud.local:3128
+      NO_PROXY: "localhost,127.0.0.1,169.254.169.254,cloud.local,sanofi.com,docker,dkr.ecr.eu-west-1.amazonaws.com,sqs.ecr.eu-west-1.amazonaws.com,api.ecr.eu-west-1.amazonaws.com,ecs-telemetry.eu-west-1.amazonaws.com,ec2messages.eu-west-1.amazonaws.com,ec2.eu-west-1.amazonaws.com,lambda.eu-west-1.amazonaws.com,ssm.eu-west-1.amazonaws.com,.s3.eu-west-1.amazonaws.com,s3.eu-west-1.amazonaws.com,autoscaling.eu-west-1.amazonaws.com,ecs.eu-west-1.amazonaws.com,logs.eu-west-1.amazonaws.com,ecs-agent.eu-west-1.amazonaws.com,ssmmessages.eu-west-1.amazonaws.com"
+      BASE_IMAGE_DOCKERFILE: "UbuntuDockerBase"
+      BASE_IMAGE_NAME: astrabase
+      
+      
+  
