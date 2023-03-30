@@ -11,7 +11,7 @@ jobs:
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
       AWS_SECRET_ACCESS_KEY_IAM: ${{ secrets.AWS_SECRET_ACCESS_KEY_IAM }}
       AWS_SESSION_TOKEN_IAM: ${{ secrets.AWS_SESSION_TOKEN_IAM }}
-      
+      AWS_ECRACCOUNTID: ${{secrets.AWS_ECRACCOUNTID}}
 
     steps:  
       - name: Checkout repository
@@ -36,7 +36,7 @@ jobs:
         if: ${{ always() }}
         uses: docker/login-action@v2
         with:
-          registry: ${ECRACCOUNTID}.dkr.ecr.us-east-1.amazonaws.com
+          registry: ${{secrets.AWS_ECRACCOUNTID}}.dkr.ecr.us-east-1.amazonaws.com
           username: ${{ secrets.AWS_ACCESS_KEY_ID_IAM }}
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY_IAM }}
         env: 
