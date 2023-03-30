@@ -18,6 +18,8 @@ jobs:
       - name: Test code
         run: |
           echo "CLI command Testing"
+          ECRACCOUNTID=$(aws sts get-caller-identity --query Account --output text)
+          echo ${{ECRACCOUNTID}}
       
       - name: Login to ECR
         uses: docker/login-action@v2
