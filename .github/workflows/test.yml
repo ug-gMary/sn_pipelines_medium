@@ -26,10 +26,10 @@ jobs:
       - name: Test code
         run: |
           echo "CLI command Testing"
+      
+      - name: Echo Account ID
+        run: | 
+          ECRACCOUNTID=$(aws sts get-caller-identity --query Account --output text)
+          echo ${ECRACCOUNTID}
 
-      - name: Login to ECR
-        uses: docker/login-action@v2
-        with:
-          registry: 046125674441.dkr.ecr.us-east-1.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
