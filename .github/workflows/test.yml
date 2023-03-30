@@ -12,7 +12,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY_IAM: ${{ secrets.AWS_SECRET_ACCESS_KEY_IAM }}
       AWS_SESSION_TOKEN_IAM: ${{ secrets.AWS_SESSION_TOKEN_IAM }}
       AWS_ECRACCOUNTID: ${{secrets.AWS_ECRACCOUNTID}}
-
+      
     steps:  
       - name: Checkout repository
         uses: actions/checkout@v2
