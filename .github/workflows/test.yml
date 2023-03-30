@@ -14,10 +14,12 @@ jobs:
 
     steps:  
       - name: Checkout repository
+        if: always()
         uses: actions/checkout@v2
       - run: echo "Checking out repository "
 
       - name: Test code
+        if: always()
         run: |
           echo "CLI command Testing"
           ECRACCOUNTID=$(aws sts get-caller-identity --query Account --output text)
